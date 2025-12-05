@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PraticandoJava/AprendendoGenerics/AprendendoGenerics.iml" filepath="$PROJECT_DIR$/PraticandoJava/AprendendoGenerics/AprendendoGenerics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PraticandoJava/ExercicioMap/ExercicioMapo.iml" filepath="$PROJECT_DIR$/PraticandoJava/ExercicioMap/ExercicioMapo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PraticandoJava/ExercicioSet/ExercicioSet.iml" filepath="$PROJECT_DIR$/PraticandoJava/ExercicioSet/ExercicioSet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PraticandoJava/FixacaoTratamento/FixacaoTratamento.iml" filepath="$PROJECT_DIR$/PraticandoJava/FixacaoTratamento/FixacaoTratamento.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PraticandoJava/PraticandoJava.iml" filepath="$PROJECT_DIR$/PraticandoJava/PraticandoJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PraticandoJava/SistemaLivraria/SistemaLivraria.iml" filepath="$PROJECT_DIR$/PraticandoJava/SistemaLivraria/SistemaLivraria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/java.iml" filepath="$PROJECT_DIR$/.idea/java.iml" />
+    </modules>
+  </component>
+</project>
