@@ -1,4 +1,4 @@
-package br.com.vininiceto.data.dto;
+package br.com.vininiceto.data.dto.v1;
 
 
 import lombok.*;

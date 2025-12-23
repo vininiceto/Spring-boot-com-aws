@@ -1,6 +1,6 @@
 package br.com.vininiceto.unitests.mapper.mocks;
 
-import br.com.vininiceto.data.dto.PersonDTO;
+import br.com.vininiceto.data.dto.v1.PersonDTO;
 import br.com.vininiceto.model.Person;
 
 import java.util.ArrayList;

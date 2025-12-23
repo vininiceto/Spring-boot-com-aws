@@ -1,9 +1,11 @@
 package br.com.vininiceto.services;
 
 import br.com.vininiceto.Repository.PersonRepository;
-import br.com.vininiceto.data.dto.PersonDTO;
+import br.com.vininiceto.data.dto.v1.PersonDTO;
+import br.com.vininiceto.data.dto.v2.PersonDTOV2;
 import br.com.vininiceto.exception.ResourceNotFoundException;
 import br.com.vininiceto.mapper.ObjectMapper;
+import br.com.vininiceto.mapper.custom.PersonMapper;
 import br.com.vininiceto.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,9 @@ public class PersonService {
 
     @Autowired
     PersonRepository repository;
+    @Autowired
+    PersonMapper convert;
+
 
     private Logger logger = LoggerFactory.getLogger(PersonService.class.getName());
 
@@ -36,6 +41,18 @@ public class PersonService {
 
     }
 
+    public List<PersonDTOV2> findAllPersonsV2() {
+
+        logger.info("Iniciando busca de todos usuários");
+
+        return ObjectMapper.parseListObject(repository.findAll(), PersonDTOV2.class);
+
+    }
+
+
+
+
+
     public PersonDTO createPerson(PersonDTO person) {
 
         logger.info("Iniciando criação de usuário");
@@ -45,6 +62,20 @@ public class PersonService {
 
         return ObjectMapper.parseObject(repository.save(entity), PersonDTO.class);
     }
+
+
+    public PersonDTOV2 createPersonV2(PersonDTOV2 person){
+
+        logger.info("Iniciando criação de usuário V2");
+
+        var entity = convert.convertEntitytoDTO(person);
+
+        return convert.convertEntityToDTO(repository.saveAndFlush(entity));
+
+    }
+
+
+
 
     public void deletePerson(Long  id) {
 
