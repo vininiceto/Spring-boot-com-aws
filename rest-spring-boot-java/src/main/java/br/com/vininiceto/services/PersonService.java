@@ -50,21 +50,18 @@ public class PersonService {
     }
 
 
-
-
-
     public PersonDTO createPerson(PersonDTO person) {
 
         logger.info("Iniciando criação de usuário");
 
-       var entity = ObjectMapper.parseObject(person, Person.class);
+        var entity = ObjectMapper.parseObject(person, Person.class);
 
 
         return ObjectMapper.parseObject(repository.save(entity), PersonDTO.class);
     }
 
 
-    public PersonDTOV2 createPersonV2(PersonDTOV2 person){
+    public PersonDTOV2 createPersonV2(PersonDTOV2 person) {
 
         logger.info("Iniciando criação de usuário V2");
 
@@ -75,9 +72,7 @@ public class PersonService {
     }
 
 
-
-
-    public void deletePerson(Long  id) {
+    public void deletePerson(Long id) {
 
         logger.info("Deletando usuário");
 
