@@ -30,6 +30,7 @@ public class PersonService {
 
         logger.info("Iniciando busca de usuário");
 
+
         return ObjectMapper.parseObject(repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID")), PersonDTO.class);
     }
 
@@ -92,7 +93,7 @@ public class PersonService {
 
             entity.setFirstName(person.getFirstName());
             entity.setLastName(person.getLastName());
-            entity.setAdress(person.getAdress());
+            entity.setAddress(person.getAddress());
             entity.setGender(person.getGender());
 
         }

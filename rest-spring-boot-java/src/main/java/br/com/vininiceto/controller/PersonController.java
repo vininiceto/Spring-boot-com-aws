@@ -2,9 +2,11 @@ package br.com.vininiceto.controller;
 
 import br.com.vininiceto.Repository.PersonRepository;
 import br.com.vininiceto.data.dto.v1.PersonDTO;
+import br.com.vininiceto.data.dto.v1.Views;
 import br.com.vininiceto.data.dto.v2.PersonDTOV2;
 import br.com.vininiceto.model.Person;
 import br.com.vininiceto.services.PersonService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +26,29 @@ public class PersonController {
     private PersonRepository repository;
 
     @GetMapping("/{id}")
-    public ResponseEntity<PersonDTO> findPersonById(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
+    @JsonView(Views.Public.class)
+    public PersonDTO findPersonById(@PathVariable Long id) {
+        var person = service.findById(id);
+        person.setPhoneNumber("");
+        person.setLastName(null);
+        person.setSensitiveData("Foo Bar");
+
+        return person;
+
     }
+
+    @GetMapping("/teste/{id}")
+    @JsonView(Views.Internal.class)
+    public PersonDTO findPersonByIdTeste(@PathVariable Long id) {
+        var person = service.findById(id);
+        person.setPhoneNumber("");
+        person.setLastName(null);
+        person.setSensitiveData("Foo Bar");
+
+        return person;
+
+    }
+
 
     @GetMapping("/users")
     public ResponseEntity<List<PersonDTO>> findAllPersons() {
