@@ -14,7 +14,7 @@ public class PersonMapper {
         PersonDTOV2 entity = new PersonDTOV2();
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
-        entity.setAdress(person.getAdress());
+        entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
         entity.setBirthDay(new Date());
 
@@ -28,7 +28,7 @@ public class PersonMapper {
         Person entity = new Person();
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
-        entity.setAdress(person.getAdress());
+        entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 
         return entity;
