@@ -1,6 +1,6 @@
 package br.com.vininiceto.unitests.mapper.mocks;
 
-import br.com.vininiceto.data.dto.v1.PersonDTO;
+import br.com.vininiceto.data.dto.v1.PersonInternalDTO;
 import br.com.vininiceto.model.Person;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class MockPerson {
         return mockEntity(0);
     }
     
-    public PersonDTO mockDTO() {
+    public PersonInternalDTO mockDTO() {
         return mockDTO(0);
     }
     
@@ -25,8 +25,8 @@ public class MockPerson {
         return persons;
     }
 
-    public List<PersonDTO> mockDTOList() {
-        List<PersonDTO> persons = new ArrayList<>();
+    public List<PersonInternalDTO> mockDTOList() {
+        List<PersonInternalDTO> persons = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
             persons.add(mockDTO(i));
         }
@@ -43,8 +43,8 @@ public class MockPerson {
         return person;
     }
 
-    public PersonDTO mockDTO(Integer number) {
-        PersonDTO person = new PersonDTO();
+    public PersonInternalDTO mockDTO(Integer number) {
+        PersonInternalDTO person = new PersonInternalDTO();
         person.setAddress("Address Test" + number);
         person.setFirstName("First Name Test" + number);
         person.setGender(((number % 2)==0) ? "Male" : "Female");

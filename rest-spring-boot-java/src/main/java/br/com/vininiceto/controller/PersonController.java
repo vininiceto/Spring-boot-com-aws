@@ -1,12 +1,11 @@
 package br.com.vininiceto.controller;
 
 import br.com.vininiceto.Repository.PersonRepository;
-import br.com.vininiceto.data.dto.v1.PersonDTO;
-import br.com.vininiceto.data.dto.v1.Views;
+import br.com.vininiceto.data.dto.v1.PersonInternalDTO;
+import br.com.vininiceto.data.dto.v1.PersonPublicDTO;
 import br.com.vininiceto.data.dto.v2.PersonDTOV2;
 import br.com.vininiceto.model.Person;
 import br.com.vininiceto.services.PersonService;
-import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
 @RestController
@@ -26,33 +27,22 @@ public class PersonController {
     @Autowired
     private PersonRepository repository;
 
-    @GetMapping("/{id}")
-    @JsonView(Views.Public.class)
-    public PersonDTO findPersonById(@PathVariable Long id) {
-        var person = service.findById(id);
-        person.setPhoneNumber("");
-        person.setLastName(null);
-        person.setSensitiveData("Foo Bar");
-
-        return person;
-
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/hal+json"})
+    public PersonPublicDTO findPersonById(@PathVariable("id") Long id) {
+        return service.findById(id);
     }
 
-    @GetMapping(value = "/teste/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @JsonView(Views.Internal.class)
-    public PersonDTO findPersonByIdTeste(@PathVariable Long id) {
-        var person = service.findById(id);
-        person.setPhoneNumber("");
-        person.setLastName(null);
-        person.setSensitiveData("Foo Bar");
-
+    @GetMapping(value = "/teste/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/hal+json"})
+    public PersonInternalDTO findPersonByIdTeste(@PathVariable Long id) {
+        var person = service.findByIdTeste(id);
+        person.setSensitiveData("Foo bar");
         return person;
 
     }
 
 
     @GetMapping("/users")
-    public ResponseEntity<List<PersonDTO>> findAllPersons() {
+    public ResponseEntity<List<PersonPublicDTO>> findAllPersons() {
         return ResponseEntity.status(HttpStatus.OK).body(service.findAllPersons());
     }
 
@@ -63,23 +53,23 @@ public class PersonController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<PersonDTO> createPerson(@RequestBody PersonDTO person) {
+    public ResponseEntity<PersonPublicDTO> createPerson(@RequestBody PersonPublicDTO person) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createPerson(person));
     }
 
     @PostMapping("/v2/register")
-    public ResponseEntity<PersonDTOV2> createPersonV2(@RequestBody PersonDTOV2 person){
+    public ResponseEntity<PersonDTOV2> createPersonV2(@RequestBody PersonDTOV2 person) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createPersonV2(person));
     }
 
 
     @PutMapping("/update")
-    public ResponseEntity<PersonDTO> updatePerson(@RequestBody Person person) {
+    public ResponseEntity<PersonPublicDTO> updatePerson(@RequestBody PersonPublicDTO person) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updatePerson(person));
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity deletePerson(@PathVariable Long id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deletePerson(@PathVariable("id") Long id) {
         service.deletePerson(id);
         return ResponseEntity.status(HttpStatus.OK).body("User deleted!");
     }

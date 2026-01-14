@@ -24,8 +24,6 @@ public class Person {
     @Length(min = 1, max = 6)
     private String gender;
 
-    public String getAddress() {
-        return address;
-    }
+
 
 }
