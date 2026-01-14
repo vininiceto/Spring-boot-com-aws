@@ -1,6 +1,7 @@
 package br.com.vininiceto.exception.handler;
 
 import br.com.vininiceto.exception.ExpcetionResponse;
+import br.com.vininiceto.exception.RequiredObjectNullException;
 import br.com.vininiceto.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,15 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler
                 .toLocalDateTime();
         ExpcetionResponse response = new ExpcetionResponse(ldt.format(dtm), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(RequiredObjectNullException.class)
+    public final ResponseEntity<ExpcetionResponse> handleBadRequestExceptions(Exception ex, WebRequest request){
+        LocalDateTime ldt = new Date().toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        ExpcetionResponse response = new ExpcetionResponse(ldt.format(dtm), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler( Exception.class)

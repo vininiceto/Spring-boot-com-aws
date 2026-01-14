@@ -5,6 +5,7 @@ import br.com.vininiceto.controller.PersonController;
 import br.com.vininiceto.data.dto.v1.PersonInternalDTO;
 import br.com.vininiceto.data.dto.v1.PersonPublicDTO;
 import br.com.vininiceto.data.dto.v2.PersonDTOV2;
+import br.com.vininiceto.exception.RequiredObjectNullException;
 import br.com.vininiceto.exception.ResourceNotFoundException;
 import br.com.vininiceto.mapper.BeanMapper;
 import br.com.vininiceto.mapper.custom.PersonMapper;
@@ -40,20 +41,19 @@ public class PersonService {
         var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
         var dto = BeanMapper.parseObject(entity, PersonPublicDTO.class);
-        //dto.add(linkTo(methodOn(PersonController.class).findPersonById(dto.getId())).withRel("findById").withType("GET"));
+
         addHateoasLinks(dto);
 
         return dto;
     }
 
-    private PersonPublicDTO addHateoasLinks(PersonPublicDTO dto) {
+    private void addHateoasLinks(PersonPublicDTO dto) {
         dto.add(linkTo(methodOn(PersonController.class).findPersonById(dto.getId())).withRel("findById").withType("GET"));
         dto.add(linkTo(methodOn(PersonController.class).findAllPersons()).withRel("findAll").withType("GET"));
         dto.add(linkTo(methodOn(PersonController.class).createPerson(dto)).withRel("createUser").withType("POST"));
         dto.add(linkTo(methodOn(PersonController.class).deletePerson(dto.getId())).withRel("deleteUser").withType("DELETE"));
         dto.add(linkTo(methodOn(PersonController.class).updatePerson(dto)).withRel("updateUser").withType("PUT"));
 
-        return dto;
     }
 
     public PersonInternalDTO findByIdTeste(Long id) {
@@ -94,7 +94,7 @@ public class PersonService {
 
 
         var dto = BeanMapper.parseObject(repository.save(entity), PersonPublicDTO.class);
-         addHateoasLinks(dto);
+        addHateoasLinks(dto);
         return dto;
     }
 
@@ -122,6 +122,8 @@ public class PersonService {
 
     public PersonPublicDTO updatePerson(PersonPublicDTO person) {
 
+        if(person == null) throw new RequiredObjectNullException();
+
         logger.info("Iniciando o update de Usuário");
         Person entity = repository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
         if (repository.existsById(entity.getId())) {
@@ -134,7 +136,7 @@ public class PersonService {
 
         }
         var dto = BeanMapper.parseObject(repository.saveAndFlush(entity), PersonPublicDTO.class);
-         addHateoasLinks(dto);
+        addHateoasLinks(dto);
         return dto;
     }
 
