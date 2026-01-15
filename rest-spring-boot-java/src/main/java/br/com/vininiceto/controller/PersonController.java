@@ -4,7 +4,6 @@ import br.com.vininiceto.Repository.PersonRepository;
 import br.com.vininiceto.data.dto.v1.PersonInternalDTO;
 import br.com.vininiceto.data.dto.v1.PersonPublicDTO;
 import br.com.vininiceto.data.dto.v2.PersonDTOV2;
-import br.com.vininiceto.model.Person;
 import br.com.vininiceto.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
 @RestController

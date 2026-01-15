@@ -9,7 +9,7 @@ import java.util.Date;
 @Service
 public class PersonMapper {
 
-    public PersonDTOV2 convertEntityToDTO(Person person){
+    public PersonDTOV2 convertEntityToDTO(Person person) {
 
         PersonDTOV2 entity = new PersonDTOV2();
         entity.setFirstName(person.getFirstName());
@@ -23,7 +23,7 @@ public class PersonMapper {
 
     }
 
-    public Person convertEntitytoDTO(PersonDTOV2 person){
+    public Person convertEntitytoDTO(PersonDTOV2 person) {
 
         Person entity = new Person();
         entity.setFirstName(person.getFirstName());
@@ -35,7 +35,6 @@ public class PersonMapper {
 
 
     }
-
 
 
 }

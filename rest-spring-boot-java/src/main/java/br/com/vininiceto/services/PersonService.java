@@ -122,7 +122,7 @@ public class PersonService {
 
     public PersonPublicDTO updatePerson(PersonPublicDTO person) {
 
-        if(person == null) throw new RequiredObjectNullException();
+        if (person == null) throw new RequiredObjectNullException();
 
         logger.info("Iniciando o update de Usuário");
         Person entity = repository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
