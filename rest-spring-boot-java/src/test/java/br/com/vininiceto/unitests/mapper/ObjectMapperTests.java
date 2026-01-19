@@ -1,6 +1,6 @@
 package br.com.vininiceto.unitests.mapper;
 
-import br.com.vininiceto.data.dto.v1.PersonDTO;
+import br.com.vininiceto.data.dto.v1.PersonInternalDTO;
 import br.com.vininiceto.model.Person;
 import br.com.vininiceto.unitests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static br.com.vininiceto.mapper.ObjectMapper.parseListObject;
-import static br.com.vininiceto.mapper.ObjectMapper.parseObject;
+import static br.com.vininiceto.mapper.BeanMapper.parseListObject;
+import static br.com.vininiceto.mapper.BeanMapper.parseObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ObjectMapperTests {
@@ -22,7 +22,7 @@ public class ObjectMapperTests {
 
     @Test
     public void parseEntityToDTOTest() {
-        PersonDTO output = parseObject(inputObject.mockEntity(), PersonDTO.class);
+        PersonInternalDTO output = parseObject(inputObject.mockEntity(), PersonInternalDTO.class);
         assertEquals(Long.valueOf(0L), output.getId());
         assertEquals("First Name Test0", output.getFirstName());
         assertEquals("Last Name Test0", output.getLastName());
@@ -32,8 +32,8 @@ public class ObjectMapperTests {
 
     @Test
     public void parseEntityListToDTOListTest() {
-        List<PersonDTO> outputList = parseListObject(inputObject.mockEntityList(), PersonDTO.class);
-        PersonDTO outputZero = outputList.get(0);
+        List<PersonInternalDTO> outputList = parseListObject(inputObject.mockEntityList(), PersonInternalDTO.class);
+        PersonInternalDTO outputZero = outputList.get(0);
 
         assertEquals(Long.valueOf(0L), outputZero.getId());
         assertEquals("First Name Test0", outputZero.getFirstName());
@@ -41,7 +41,7 @@ public class ObjectMapperTests {
         assertEquals("Address Test0", outputZero.getAddress());
         assertEquals("Male", outputZero.getGender());
 
-        PersonDTO outputSeven = outputList.get(7);
+        PersonInternalDTO outputSeven = outputList.get(7);
 
         assertEquals(Long.valueOf(7L), outputSeven.getId());
         assertEquals("First Name Test7", outputSeven.getFirstName());
@@ -49,7 +49,7 @@ public class ObjectMapperTests {
         assertEquals("Address Test7", outputSeven.getAddress());
         assertEquals("Female", outputSeven.getGender());
 
-        PersonDTO outputTwelve = outputList.get(12);
+        PersonInternalDTO outputTwelve = outputList.get(12);
 
         assertEquals(Long.valueOf(12L), outputTwelve.getId());
         assertEquals("First Name Test12", outputTwelve.getFirstName());
