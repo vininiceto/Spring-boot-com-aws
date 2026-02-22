@@ -1,8 +1,12 @@
-package entities;
+package br.com.alura.screenmatch.models;
 
-public class Titulo {
 
+import com.google.gson.annotations.SerializedName;
+
+public class Titulo implements Comparable<Titulo> {
+    @SerializedName("Title")
     private String name;
+    @SerializedName("Year")
     private Integer releaseYear;
     private Boolean includedPlan;
     private Double someAvaliation;
@@ -19,6 +23,12 @@ public class Titulo {
     }
 
     public Titulo() {
+    }
+
+    public Titulo(TitleOMDB meuTituloOMDB) {
+        this.name = meuTituloOMDB.title();
+        this.releaseYear = Integer.valueOf(meuTituloOMDB.year());
+        this.durationMinutes = Integer.valueOf(meuTituloOMDB.runtime().substring(0, 2));
     }
 
     public String getName() {
@@ -70,7 +80,8 @@ public class Titulo {
     }
 
     public void showTechnichRecord() {
-        System.out.println("");
+        System.out.println("Nome do filme: " + getName());
+        System.out.println("Ano de lançamento: " + getReleaseYear());
     }
 
     public void evaluate(double notice) {
@@ -82,5 +93,19 @@ public class Titulo {
 
     public Double takeAverage() {
         return getSomeAvaliation() / getTotalAvaliation();
+    }
+
+    @Override
+    public int compareTo(Titulo otherTitle) {
+        return this.getName().compareTo(otherTitle.getName());
+    }
+
+    @Override
+    public String toString() {
+        return "Titulo{" +
+                "name='" + name + '\'' +
+                ", releaseYear=" + releaseYear +
+                ", durationMinutes=" + durationMinutes +
+                '}';
     }
 }

@@ -1,6 +1,8 @@
-package entities;
+package br.com.alura.screenmatch.models;
 
-public class Film  extends Titulo{
+import br.com.alura.screenmatch.calculos.Classific;
+
+public class Film  extends Titulo implements Classific {
 
     private String director;
 
@@ -20,19 +22,9 @@ public class Film  extends Titulo{
         this.director = director;
     }
 
-    @Override
-    public void showTechnichRecord() {
-        super.showTechnichRecord();
-    }
 
     @Override
-    public void evaluate(double notice) {
-        super.evaluate(notice);
+    public int getClassification() {
+        return 0;
     }
-
-    @Override
-    public Double takeAverage() {
-        return super.takeAverage();
-    }
-
 }

@@ -1,4 +1,4 @@
-package entities;
+package br.com.alura.screenmatch.models;
 
 public class Series extends Titulo {
 
@@ -51,17 +51,9 @@ public class Series extends Titulo {
     }
 
     @Override
-    public void showTechnichRecord() {
-        super.showTechnichRecord();
+    public Integer getDurationMinutes() {
+        return seasons * episodesPerSeasons * minutesPerEpisode;
     }
 
-    @Override
-    public void evaluate(double notice) {
-        super.evaluate(notice);
-    }
 
-    @Override
-    public Double takeAverage() {
-        return super.takeAverage();
-    }
 }

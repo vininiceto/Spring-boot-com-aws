@@ -28,6 +28,7 @@ public class PersonInternalDTO extends RepresentationModel<PersonInternalDTO> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String lastName;
     @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Date birthDay;
     private String address;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
